@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
-import add from '@src/utils/math';
+import add from '@/utils/math';
 
 dotenv.config();
 

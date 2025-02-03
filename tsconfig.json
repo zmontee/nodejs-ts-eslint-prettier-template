@@ -3,11 +3,10 @@
     "target": "es6",
     "lib": ["ESNext"],
     "module": "ESNext",
-    "rootDir": "./src",
     "moduleResolution": "node",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@src/*": ["*"]
+      "@/*": ["./src/*"]
     },
     "noEmit": true,
     "outDir": "./dist",

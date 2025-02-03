@@ -19,20 +19,15 @@ export default tseslint.config(
     ignores: ['node_modules', 'dist', 'coverage', 'jest.config.mjs'],
   },
   pluginJs.configs.recommended,
-  // ...tseslint.configs.strictTypeChecked,
-  // ...tseslint.configs.stylisticTypeChecked,
-  // ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.recommended,
   eslintPluginPromise.configs['flat/recommended'],
-  eslintPluginImport.flatConfigs.recommended,
-  eslintPluginImport.flatConfigs.typescript,
   {
     files: ['**/*.{ts}'],
 
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
-        project: [path.resolve(__dirname, './tsconfig.json')],
+        project: ['./tsconfig.json'],
         sourceType: 'module',
         projectService: true,
         tsconfigRootDir: __dirname,
@@ -45,17 +40,18 @@ export default tseslint.config(
     plugins: {
       '@typescript-eslint': tseslint.plugin,
       prettier: eslintPluginPrettier,
+      import: eslintPluginImport,
     },
 
     settings: {
       'import/resolver': {
         typescript: {
           alwaysTryTypes: true,
-          project: './tsconfig.json',
+          project: './typescript',
         },
         alias: {
-          map: [['@', path.resolve(__dirname, './src/*')]],
-          extensions: ['.ts', '.js', '.jsx', '.tsx'],
+          map: [['@', './src']],
+          extensions: ['.ts', '.js', '.mjs', '.json'],
         },
       },
     },
