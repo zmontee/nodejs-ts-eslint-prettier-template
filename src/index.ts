@@ -1,13 +1,15 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
-import * as process from 'node:process';
+import add from '@src/utils/math';
 
 dotenv.config();
 
-const app = express();
+const testMath = add(2, 3);
 
-console.log('ex');
+console.log(testMath);
+
+const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -16,3 +18,5 @@ app.use('/', (req, res) => {
 });
 
 app.listen(process.env.PORT || 2998);
+
+export default app;

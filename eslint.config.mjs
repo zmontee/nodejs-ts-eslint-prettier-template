@@ -1,8 +1,8 @@
 // @ts-check
 
-import globals from 'globals';
-import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import pluginJs from '@eslint/js';
+import globals from 'globals';
 import eslintPluginPromise from 'eslint-plugin-promise';
 import eslintPluginImport from 'eslint-plugin-import';
 import eslintConfigPrettier from 'eslint-config-prettier';
@@ -16,11 +16,12 @@ const __dirname = path.dirname(__filename); // get the name of the directory
 
 export default tseslint.config(
   {
-    ignores: ['node_modules', 'dist', 'coverage'],
+    ignores: ['node_modules', 'dist', 'coverage', 'jest.config.mjs'],
   },
   pluginJs.configs.recommended,
   // ...tseslint.configs.strictTypeChecked,
   // ...tseslint.configs.stylisticTypeChecked,
+  // ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.recommended,
   eslintPluginPromise.configs['flat/recommended'],
   eslintPluginImport.flatConfigs.recommended,
@@ -31,7 +32,7 @@ export default tseslint.config(
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
-        project: ['./tsconfig.json'],
+        project: [path.resolve(__dirname, './tsconfig.json')],
         sourceType: 'module',
         projectService: true,
         tsconfigRootDir: __dirname,
@@ -47,14 +48,14 @@ export default tseslint.config(
     },
 
     settings: {
-      'import/resolvers': {
+      'import/resolver': {
         typescript: {
           alwaysTryTypes: true,
           project: './tsconfig.json',
         },
         alias: {
-          map: [['@', './src']],
-          extensions: ['.ts', '.js', '.json'],
+          map: [['@', path.resolve(__dirname, './src/*')]],
+          extensions: ['.ts', '.js', '.jsx', '.tsx'],
         },
       },
     },
